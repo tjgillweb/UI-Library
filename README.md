@@ -49,6 +49,8 @@ body{
 ```
 - The style loader adds the style tag to the head section of the HTML page.
 
+---------------------------------------------------------------------------------------------------------------------------------------
+
 ### Tooltip
 
 #### HTML (index.html)
@@ -67,10 +69,10 @@ body{
 <body>
 
   <div class="container">
+    <h1>UI Library</h1>
+    <h2>Tooltip</h2>
     <!-- tooltip -->
-    <p>Lorem dolor sit amet consectetur adipisicing elit. Voluptate sequi odit totam. Quod maiores saepe sequi. 
-    <span class="tooltip" data-message="I'm a tooltip!!">Illum aspernatur</span> 
-    aut voluptatum, sequi quibusdam laudantium? Laborum asperiores consequuntur eum corporis exercitationem debitis.</p>
+    <p><span class="tooltip" data-message="I'm a tooltip!!">Hover over me!</span></p>
   </div>
   
   <script src="assets/bundle.js"></script>
@@ -118,43 +120,78 @@ tooltip.init();
  
 - Create tooltip.css inside ui/styles folder  
 
-**tooltip.css**
- ```CSS
-.tooltip{
-  position: relative;
-  display: inline-block;
-  color: #ff6565;
-  border-bottom: 1px dotted #ff6565;
-  cursor: help;
+**tooltip.css**  
+Check in github code
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+### Dropdown
+
+**index.html**  
+```HTML
+<h2>Dropdown</h2>
+<!-- dropdowns -->
+  <div class="dropdown">
+    <button class="trigger">Dropdown 1</button>
+    <div class="content">
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis possimus, a natus totam sequi velit? Vel
+         cupiditate hic incidunt quam laboriosam tenetur nam, voluptate, necessitatibus ex porro, soluta accusantium
+         aspernatur.</p>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="trigger">Dropdown 2</button>
+    <div class="content">
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis possimus, a natus totam sequi velit? Vel
+         cupiditate hic incidunt quam laboriosam tenetur nam, voluptate, necessitatibus ex porro, soluta accusantium
+         aspernatur.</p>
+    </div>
+  </div>
+```
+- When we click the buttom with a class of 'trigger', it will show/hide the content underneath(div with class 'content').
+- Create `dropdown.js` inside ui folder.  
+
+**dropdown.js**  
+```Javascript
+import './styles/dropdown.css';
+
+class Dropdown {
+    constructor(container) { //container is the div with class dropdown
+        this.container = container;
+        this.trigger = container.querySelector('.trigger');
+        this.content = container.querySelector('.content');
+    }
+    //show/hide content when user clicks on trigger
+    init() {
+        this.trigger.addEventListener('click', () => {
+            this.trigger.classList.toggle('active');
+            this.content.classList.toggle('active');
+        })
+    }
 }
-.tip{
-  visibility: hidden;
-  width: 150px;
-  background-color: #ff6565;
-  color: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 5px 0;
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  margin-left: -75px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.tip.active{
-  visibility: visible;
-  opacity: 1;
-}
-.tip::after{
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -4px;
-  border-width: 4px;
-  border-style: solid;
-  border-color: transparent;
-  border-top-color: #ff6565;
-}
- ```
+export {
+    Dropdown as
+    default
+};
+```
+
+**index.js**  
+Add the following code:
+```Javascript code
+import Dropdown from './ui/dropdown';
+//create dropdowns
+const dropdowns = document.querySelectorAll('.dropdown');
+
+//create two class instances, one for each dropdown
+dropdowns.forEach(dropdown => {
+    const instance = new Dropdown(dropdown);
+    instance.init();
+})
+```
+
+**dropdown.css**  
+Check in github code
+
+
+
+ 
