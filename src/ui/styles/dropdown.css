@@ -1,0 +1,48 @@
+.dropdown {
+    margin-bottom: 1rem;
+}
+
+.dropdown .trigger {
+    font-family: 'Noto Sans JP', sans-serif;
+    padding: .5rem 1.8rem;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dropdown .trigger::after {
+    content: ">";
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    transform: rotate(90deg) scale(0.5, 1);
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.dropdown .trigger.active::after {
+    transform: rotate(-90deg) scale(0.5, 1);
+}
+
+.dropdown .content {
+    display: none;
+}
+
+.dropdown .content.active {
+    display: block;
+}
